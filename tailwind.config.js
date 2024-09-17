@@ -4,8 +4,13 @@ export default {
     "./views/**/*.{html,js}",
     "./public/**/*.{html,js}"
   ],
+  daisyui: {
+    themes: ["light", "dark", "cupcake"],
+  },
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
 }
