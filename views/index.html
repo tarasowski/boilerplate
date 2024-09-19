@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaaS Starter Kit by MVP Foundry</title>
+    <title>{{ config.seoSettings.title }}</title>
+    <meta description="{{ config.seoSettings.description }}">
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
@@ -29,9 +30,9 @@
             </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Pricing</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Demo</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Wall of love</a>
+            {% for item in config.mainNav %}
+            <a href="{{item.href}}" class="text-sm font-semibold leading-6 text-gray-900">{{item.title}}</a>
+            {% endfor %}
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
             <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">Log in <span

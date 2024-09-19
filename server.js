@@ -1,5 +1,7 @@
 import express from "express"
 import nunjucks from "nunjucks"
+import { marketingConfig } from "./config/marketing.js"
+
 const app = express()
 
 app.use(express.static("public"))
@@ -16,7 +18,7 @@ const setCache = (req, res, next) => {
 };
 
 app.get("/", (req, res) => {
-    res.render('index.html')
+    res.render('index.html', { config: marketingConfig })
 })
 
 app.get("/login", (req, res) => {
@@ -25,6 +27,11 @@ app.get("/login", (req, res) => {
 
 app.get("/register", (req, res) => {
     res.render('auth/register.html')
+})
+
+app.get("/dashboard", (req, res) => {
+    res.set('HX-Redirect', '/dashboard')
+    res.render('dashboard/index.html')
 })
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
