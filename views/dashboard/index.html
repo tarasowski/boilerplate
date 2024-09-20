@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="js/htmx.min.js"></script>
 </head>
 
-<body class="h-full">
+<body hx-boost="true" class="h-full">
     <!--
   This example requires updating your template:
 
@@ -79,7 +80,7 @@
                                     <ul role="list" class="-mx-2 space-y-1">
                                         <li>
                                             <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
-                                            <a href="#"
+                                            <a hx-target="#mainContent" href="/dashboard"
                                                 class="group flex gap-x-3 rounded-md bg-gray-50 p-2 text-sm font-semibold leading-6 text-indigo-600">
                                                 <svg class="h-6 w-6 shrink-0 text-indigo-600" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -91,7 +92,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#"
+                                            <a hx-target="#mainContent" href="/team"
                                                 class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
                                                 <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
                                                     fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -103,7 +104,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#"
+                                            <a hx-target="#mainContent" href="/projects"
                                                 class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
                                                 <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
                                                     fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -115,7 +116,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#"
+                                            <a hx-target="#mainContent" href="/calendar"
                                                 class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
                                                 <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
                                                     fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -206,9 +207,20 @@
                     <ul role="list" class="flex flex-1 flex-col gap-y-7">
                         <li>
                             <ul role="list" class="-mx-2 space-y-1">
+                                {% for item in config.mainNav %}
                                 <li>
-                                    <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
-                                    <a href="#"
+                                    <a hx-on:htmx-after-on-load="console.log('loaded')"
+                                        id="{{item.href.slice(1, 5) + '-link'}}" hx-get="{{ item.href }}"
+                                        hx-target="#main-content" href="{{ item.href }}"
+                                        class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
+                                        {{ item.icon | safe }}
+                                        {{ item.title }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                                <!--
+                                <li>
+                                    <a hx-target="#mainContent" href="/dashboard"
                                         class="group flex gap-x-3 rounded-md bg-gray-50 p-2 text-sm font-semibold leading-6 text-indigo-600">
                                         <svg class="h-6 w-6 shrink-0 text-indigo-600" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -219,7 +231,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#"
+                                    <a hx-target="#mainContent" href="/team"
                                         class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
                                         <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
                                             fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -231,7 +243,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#"
+                                    <a hx-target="#mainContent" href="/projects"
                                         class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
                                         <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
                                             fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -243,7 +255,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#"
+                                    <a hx-target="#mainContent" href="/calendar"
                                         class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
                                         <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
                                             fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -280,6 +292,7 @@
                                         Reports
                                     </a>
                                 </li>
+                                -->
                             </ul>
                         </li>
                         <li>
@@ -316,10 +329,10 @@
                             <a href="#"
                                 class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
                                 <img class="h-8 w-8 rounded-full bg-gray-50"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                    src="https://www.tarasowski.de/_next/image?url=%2Ftarasowski.png&w=1080&q=75"
                                     alt="">
                                 <span class="sr-only">Your profile</span>
-                                <span aria-hidden="true">Tom Cook</span>
+                                <span aria-hidden="true">Dimitri Tarasowski</span>
                             </a>
                         </li>
                     </ul>
@@ -345,7 +358,7 @@
             </a>
         </div>
 
-        <main class="py-10 lg:pl-72">
+        <main hx-target="this" id="main-content" class="py-10 lg:pl-72">
             <div class="px-4 sm:px-6 lg:px-8">
                 <!-- Your content -->
                 <div class="border-b border-gray-200 pb-5 sm:flex sm:items-center sm:justify-between">
@@ -356,13 +369,9 @@
                             New post</button>
                     </div>
                 </div>
-
-
             </div>
         </main>
     </div>
-
-
 </body>
 
 </html>
