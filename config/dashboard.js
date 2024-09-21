@@ -8,32 +8,32 @@ export const dashboardConfig = {
     mainNav: [
         {
             title: "Dashboard",
-            href: "/dashboard",
+            href: "/dashboard/main",
             icon: Icons.home()
         },
         {
             title: "Team",
-            href: "/team",
+            href: "/dashboard/team",
             icon: Icons.users()
         },
         {
             title: "Projects",
-            href: "/projects",
+            href: "/dashboard/projects",
             icon: Icons.folder()
         },
         {
             title: "Calendar",
-            href: "/calendar",
+            href: "/dashboard/calendar",
             icon: Icons.calendar()
         },
         {
             title: "Documents",
-            href: "/documents",
+            href: "/dashboard/documents",
             icon: Icons.documents()
         },
         {
             title: "Reports",
-            href: "/reports",
+            href: "/dashboard/reports",
             icon: Icons.reports()
         },
     ],

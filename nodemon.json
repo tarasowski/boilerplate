@@ -1,8 +1,9 @@
 {
     "watch": [
-        "server.js",
-        "views/"
+        "views",
+        "public",
+        "server.js"
     ],
-    "ext": "js,html",
+    "ext": "js,html,css",
     "exec": "node server.js"
 }

@@ -2,10 +2,15 @@ import express from "express"
 import nunjucks from "nunjucks"
 import { marketingConfig } from "./config/marketing.js"
 import { dashboardConfig } from "./config/dashboard.js"
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express()
 
-app.use(express.static("public"))
+app.use(express.static(path.join(__dirname, "public")))
 
 nunjucks.configure('views', {
     autoescape: true,
@@ -31,20 +36,35 @@ app.get("/register", (req, res) => {
 })
 
 app.get("/dashboard", (req, res) => {
-    res.set('HX-Redirect', '/dashboard')
-    res.render('dashboard/index.html', { config: dashboardConfig, path: req.path })
+    //res.set('HX-Redirect', '/dashboard')
+    res.render('dashboard/layout.html', { config: dashboardConfig })
 })
 
-app.get("/team", (req, res) => {
-    res.render('dashboard/team/index.html', { path: 'team' })
+app.get("/dashboard/main", (req, res) => {
+    res.set('HX-Redirect', '/dashboard/main')
+    const partial = req.query.partial === 'true'
+    res.render('dashboard/main/index.html', { config: dashboardConfig, partial })
 })
 
-app.get("/projects", (req, res) => {
+app.get("/dashboard/team", (req, res) => {
+    const partial = req.query.partial === 'true'
+    res.render('dashboard/team/index.html', { config: dashboardConfig, partial })
+})
+
+app.get("/dashboard/projects", (req, res) => {
     res.render('dashboard/projects/index.html')
 })
 
-app.get("/calendar", (req, res) => {
+app.get("/dashboard/calendar", (req, res) => {
     res.render('dashboard/calendar/index.html')
+})
+
+app.get("/dashboard/documents", (req, res) => {
+    res.render('dashboard/documents/index.html')
+})
+
+app.get("/dashboard/reports", (req, res) => {
+    res.render('dashboard/reports/index.html')
 })
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
