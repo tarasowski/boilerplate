@@ -1,9 +1,11 @@
 {
     "watch": [
-        "views",
+        "views/**/*",
         "public",
         "server.js"
     ],
-    "ext": "js,html,css",
-    "exec": "node server.js"
+    "ext": "js,html",
+    "ignore": [
+        "node_modules/"
+    ]
 }

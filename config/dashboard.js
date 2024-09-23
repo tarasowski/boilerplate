@@ -1,4 +1,4 @@
-import { Icons } from "../components/icons.js";
+import { Icons } from "../views/components/icons.js";
 
 export const dashboardConfig = {
     seoSettings: {
@@ -8,7 +8,7 @@ export const dashboardConfig = {
     mainNav: [
         {
             title: "Dashboard",
-            href: "/dashboard/main",
+            href: "/dashboard",
             icon: Icons.home()
         },
         {
