@@ -17,6 +17,8 @@
     "@tailwindcss/forms": "^0.5.9",
     "autoprefixer": "^10.4.20",
     "chokidar": "^3.6.0",
+    "db-migrate": "^1.0.0-beta.29",
+    "db-migrate-sqlite3": "^1.0.2",
     "express": "^4.21.0",
     "nunjucks": "^3.2.4",
     "postcss": "^8.4.47",
