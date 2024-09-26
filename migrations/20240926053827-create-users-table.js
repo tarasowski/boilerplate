@@ -14,18 +14,18 @@ exports.setup = function (options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function (db, callback) {
+exports.up = function (db) {
   db.createTable('users', {
     id: { type: 'int', primaryKey: true, autoIncrement: true },
-    name: { type: 'string', length: 100 },
-    email: { type: 'string', length: 100, unique: true },
-    created_at: { type: 'datetime', defaultValue: new String('CURRENT_TIMESTAMP') },
-    updated_at: { type: 'datetime', defaultValue: new String('CURRENT_TIMESTAMP') }
-  }, callback);
+    username: { type: 'string', notNull: true, unique: true },
+    password: { type: 'string', notNull: true }
+  });
+  return null;
 };
 
-exports.down = function (db, callback) {
-  db.dropTable('users', callback);
+exports.down = function (db) {
+  db.dropTable('users');
+  return null;
 };
 
 exports._meta = {
